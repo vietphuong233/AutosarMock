@@ -7,9 +7,9 @@ extern VAR(AUTOSAR_uint8, AUTOMATIC) adjust_data;
 /* ModuleID    :                                                              */
 /* ServiceID   :                                                              */
 /* Name        : Rte_Read_RP_PositionData_ReceivePosition                     */
-/* Param       :                                                              */
+/* Param       : P2VAR: Pointer to memory location which save position data   */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Read position data from Seat Adjuster SWC                    */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -25,9 +25,9 @@ FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Read_RP_PositionData_ReceiveP
 /* ModuleID    :                                                              */
 /* ServiceID   :                                                              */
 /* Name        : Rte_Write_PP_PositionCommand_SendCommand                     */
-/* Param       :                                                              */
+/* Param       : VAR: Command to Motor Control SWC                            */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Send Command to Motor Control SWC                            */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -58,9 +58,9 @@ extern VAR(ParameterType, AUTOMATIC) parm;
 /* ModuleID    :                                                              */
 /* ServiceID   :                                                              */
 /* Name        : Rte_Read_RP_Parameter_ReceiveCalibParam                      */
-/* Param       :                                                              */
+/* Param       : P2VAR: Pointer to memory location which save default data    */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Receive default data from Parameter SWC                      */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -77,9 +77,11 @@ extern FUNC(Std_ReturnType, NvM_CODE) NvM_ReadBlock( VAR(NvM_BlockIdType, AUTOMA
 /* ModuleID    :                                                              */
 /* ServiceID   :                                                              */
 /* Name        : Rte_Call_RP_MemorySeat_NvM_ReadBlock                         */
-/* Param       :                                                              */
+/* Param       : VAR: The block identifier uniquely identifies one NVRAM block*/
+/*                    descriptor                                              */
+/*               P2VAR: Pointer to the RAM data block                         */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Read data from NV memory                                     */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -95,10 +97,12 @@ extern FUNC(Std_ReturnType, NvM_CODE) NvM_WriteBlock( VAR(NvM_BlockIdType, AUTOM
 /******************************************************************************/
 /* ModuleID    :                                                              */
 /* ServiceID   :                                                              */
-/* Name        : Rte_Call_RP_MemorySeat_NvM_WriteBlock                         */
-/* Param       :                                                              */
+/* Name        : Rte_Call_RP_MemorySeat_NvM_WriteBlock                        */
+/* Param       : VAR: The block identifier uniquely identifies one NVRAM block*/
+/*                    descriptor                                              */
+/*               P2VAR: Pointer to the RAM data block                         */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Write data to NV memory                                        */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -109,6 +113,23 @@ FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MemorySeat_NvM_WriteB
     return ret_val;
 }
 
+
+extern FUNC(void, ElectricSeatControl_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) );
+/******************************************************************************/
+/* ModuleID    :                                                              */
+/* ServiceID   :                                                              */
+/* Name        : Rte_ProcessCommand_10ms                                      */
+/* Param       :                                                              */
+/* Return      :                                                              */
+/* Contents    : Runnable Process Command                                     */
+/* Author      : QINeS Ecuc Generator(Java)                                   */
+/* Note        :                                                              */
+/******************************************************************************/
+FUNC(void, RTE_CODE_EcucPartition_0) Rte_ProcessCommand_10ms( VAR(void, AUTOMATIC) ) {
+
+    ProcessCommand_10ms();
+
+}
 
 
 

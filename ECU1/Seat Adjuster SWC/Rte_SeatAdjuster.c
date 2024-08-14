@@ -7,9 +7,10 @@ extern FUNC(Dio_PortLevelType, IoHwAb_CODE) IoHwAb_DioReadChannelGroups( P2CONST
 /* ModuleID    :                                                              */
 /* ServiceID   :                                                              */
 /* Name        : Rte_Call_RP_AdjustData_DioReadChannelGroup                   */
-/* Param       :                                                              */
+/* Param       : P2CONST: Pointer to ChannelGroup                             */
+/*               P2VAR: Pointer to memory location which save button state    */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Read button state from IoHwAb                                */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -26,9 +27,9 @@ VAR(AUTOSAR_uint8, AUTOMATIC) adjust_data;
 /* ModuleID    :                                                              */
 /* ServiceID   :                                                              */
 /* Name        : Rte_Write_PP_PositionData_SendPosition                       */
-/* Param       :                                                              */
+/* Param       : VAR: Position data which send to Electric Seat Control SWC   */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : send position data to Electric Seat Control SWC              */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -47,7 +48,7 @@ extern FUNC(void, SeatAdjuster_CODE) HandleSeatAdjuster_10ms( VAR(void, AUTOMATI
 /* Name        : Rte_HandleSeatAdjuster_10ms                                  */
 /* Param       :                                                              */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Runnable Handle Seat Adjuster                                */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/

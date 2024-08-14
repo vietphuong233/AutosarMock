@@ -8,7 +8,7 @@ extern FUNC(void, IoHwAb_CODE) IoHwAb_SeatMoveForward( VAR(void, AUTOMATIC));
 /* Name        : Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward              */
 /* Param       :                                                              */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Call IoHwAb to move seat forward                             */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -27,7 +27,7 @@ extern FUNC(void, IoHwAb_CODE) IoHwAb_SeatMoveBack( VAR(void, AUTOMATIC));
 /* Name        : Rte_Call_RP_MotorControl_IoHwAb_SeatMoveBack                 */
 /* Param       :                                                              */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Call IoHwAb to move seat back                                */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -46,7 +46,7 @@ extern FUNC(void, IoHwAb_CODE) IoHwAb_BackSeatFold( VAR(void, AUTOMATIC));
 /* Name        : Rte_Call_RP_MotorControl_IoHwAb_BackSeatFold                 */
 /* Param       :                                                              */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Call IoHwAb to fold backseat                                 */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -64,7 +64,7 @@ extern FUNC(void, IoHwAb_CODE) IoHwAb_BackSeatUnFold( VAR(void, AUTOMATIC));
 /* Name        : Rte_Call_RP_MotorControl_IoHwAb_BackSeatFold                 */
 /* Param       :                                                              */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Call IoHwAb to unfold backseat                               */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -82,9 +82,9 @@ VAR(Std_ReturnType, AUTOMATIC) Rte_Read_RP_PositionCommand_Command_status = RTE_
 /* ModuleID    :                                                              */
 /* ServiceID   :                                                              */
 /* Name        : Rte_Read_RP_PositionCommand_ReceiveCommand                   */
-/* Param       :                                                              */
+/* Param       : P2VAR: Pointer to memory location which save command         */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Receive Command from Electric Seat Control SWC               */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -107,7 +107,7 @@ extern FUNC(void, MotorControl_CODE) HandlePositionCommand_10ms( VAR(void, AUTOM
 /* Name        : Rte_HandlePositionCommand_10ms                               */
 /* Param       :                                                              */
 /* Return      :                                                              */
-/* Contents    : Ecu Configuration(Ecuc)                                      */
+/* Contents    : Runnable Handle Position Command                             */
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
@@ -120,20 +120,18 @@ FUNC(void, RTE_CODE_EcucPartition_0) Rte_HandlePositionCommand_10ms( VAR(void, A
 
 
 
-// Motor Control - COMCbk
-VAR(AUTOSAR_uint8, AUTOMATIC) Rte_CommandSignal[3];
+VAR(AUTOSAR_uint8, AUTOMATIC) Rte_CommandSignal;
+extern FUNC(Std_ReturnType, Com_CODE) Com_ReceiveSignal( VAR(Com_SignalIdType, AUTOMATIC) SignalId, P2VAR(void, AUTOMATIC, RTE_APPL_DATA) SignalDataPtr );
 
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_COMCbk_CommandSignal( void )
+FUNC(void, RTE_CODE_EcucPartition_0) Rte_COMCbk_CommandSignal( void )
 {
     if (Rte_InitState == RTE_STATE_INIT)
     {
         (void)GetSpinlock(Rte_Spinlock_CommandSignal);
-        (void)Com_ReceiveSignalGroup(ComConf_ComSignalGroup_CommandSignal);
-        (void)Com_ReceiveSignal(ComConf_ComSignalGroup_SeatSignal, &(*(&ComConf_ComSignalGroup_CommandSignal)).SeatSignal )
+        // (void)Com_ReceiveSignalGroup(ComConf_ComSignalGroup_CommandSignal);
+        (void)Com_ReceiveSignal(ComConf_ComSignal_ComISignal_HS_CAN1_CommandSignal, &Rte_CommanSignal);
         // (void)Rte_QMApplication_Core2_RxUpdate_NetASIL_LOT_ADataRawSafe_LOT_ADataRawSafe_Sender = 1;
-        (void)Rte_Update_Command = 1;
+        // (void)Rte_Update_Command = 1;
         (void)ReleaseSpinlock(Rte_Spinlock_CommandSignal);
     }	
-	/* return true for accept this com Pdu */
-	return TRUE;
 }
