@@ -9,6 +9,9 @@
 /* definitions                                                                */
 /*----------------------------------------------------------------------------*/
 
+/* Command signal definition */
+#define command_signal       uint8_t
+
 /* Command Signal Definitions */
 #define MOVE_FORWARD_COMMAND   0x40u
 #define MOVE_BACKWARD_COMMAND  0x80u
