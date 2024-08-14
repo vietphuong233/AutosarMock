@@ -10,13 +10,8 @@
 /*----------------------------------------------------------------------------*/
 static seat_control_t g_CONTROL;
 
-static seat_positon_t g_CALIB_POSITION;
-/*----------------------------------------------------------------------------*/
-/* functions prototypes                                                       */
-/*----------------------------------------------------------------------------*/
-command_type_t GetCommandType( command_signal command );
-void StartAdjusting(seat_positon_t new_positon);
-uint32_t GetMemoryId(command_signal command)
+static seat_position_t g_MAX_POSITION;
+
 /*----------------------------------------------------------------------------*/
 /* private functions                                                          */
 /*----------------------------------------------------------------------------*/
@@ -42,35 +37,53 @@ command_type_t GetCommandType( command_signal command )
     }
     else
     {
-        /* MISRA */
+        /* Avoid MISRA */
     }
 
     return return_value;
 }
 
-void UpdatePosition(command_signal command)
+position_status_t UpdatePosition(command_signal command)
 {
+    position_status_t return_value = MOVE_OK;
+
     switch (command)
     {
         case MOVE_FORWARD_SIGNAL:
-            g_CONTROL.POSITION.SEAT_POS++;
+            if ( g_CONTROL.POSITION.SEAT_POS == g_MAX_POSITION.SEAT_POS )
+            {
+                return_value = MOVE_NOT_OK;
+            }
+            else
+            {
+              g_CONTROL.POSITION.SEAT_POS++;
+            }
             break;
         case MOVE_BACKWARD_SIGNAL:
             g_CONTROL.POSITION.SEAT_POS--;
             break;
         case FOLD_SIGNAL:
-            g_CONTROL.POSITION.BACKREST_POS++;
+            if ( g_CONTROL.POSITION.BACKREST_POS == g_MAX_POSITION.BACKREST_POS )
+            {
+                return_value = MOVE_NOT_OK;
+            }
+            else
+            {
+                g_CONTROL.POSITION.BACKREST_POS++;
+            }
             break;
         case UNFOLD_SIGNAL:
             g_CONTROL.POSITION.BACKREST_POS--;
             break;
         default:
-            /* MISRA */
+            /* Empty signal, do nothing */
             break;
     }
+
+    return return_value;
 }
 
-void StartAdjusting(seat_positon_t new_positon)
+void StartAdjusting(seat_position_t new_positon)
 {
     g_CONTROL.SEAT_MOVE     = new_positon.SEAT_POS - g_CONTROL.POSITION.SEAT_POS;
     g_CONTROL.BACKREST_MOVE = new_positon.BACKREST_POS - g_CONTROL.POSITION.BACKREST_POS;
@@ -80,17 +93,18 @@ void StartAdjusting(seat_positon_t new_positon)
 uint32_t GetMemoryId(command_signal command)
 {
     uint32_t return_value = 0;
-    if (0x02 == CHECK_MEMORY_COMMAND(command))
+
+    switch (CHECK_MEMORY_COMMAND(command))
     {
-        return_value = BLOCKID1;
-    }
-    else if (0x03 == CHECK_MEMORY_COMMAND(command))
-    {
-        return_value = BLOCKID2;
-    }
-    else
-    {
-        /* MISRA */
+        case 0x02:
+            return_value = BLOCKID1;
+            break;
+        case 0x03:
+            return_value = BLOCKID2;
+            break;
+        default:
+            /* Do nothing */
+            break;
     }
 
     return return_value;
@@ -101,19 +115,25 @@ uint32_t GetMemoryId(command_signal command)
 /*----------------------------------------------------------------------------*/
 
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
 /* Name        : InitElectricSeatControl                                      */
 /* Param       :                                                              */
 /* Return      :                                                              */
 /* Contents    : Initiate Electric Seat Control SWC variables                 */
 /* Author      :                                                              */
-/* Note        :                                                              */
+/* Note        : This Runnable initiate global variables g_...                */
 /******************************************************************************/
 FUNC(void, SeatAdjuster_CODE) InitElectricSeatControl( VAR(void, AUTOMATIC) )
 {
-    Rte_Read_RP_Parameter_ReceiveCalibParam(&g_CALIB_POSITION);
-    Rte_Call_RP_MemorySeat_NvM_ReadBlock(BLOCKIDOLD, &g_CONTROL.POSITION);
+    seat_position_t init_position;
+
+    Rte_Read_RP_Parameter_ReceiveCalibParam(&g_MAX_POSITION);
+    Rte_Call_RP_MemorySeat_NvM_ReadBlock(BLOCKIDOLD, &init_position);
+
+    g_CONTROL.POSITION.SEAT_POS     = init_position.SEAT_POS;
+    g_CONTROL.POSITION.BACKREST_POS = init_position.BACKREST_POS;
+    g_CONTROL.SEAT_MOVE             = 0;
+    g_CONTROL.BACKREST_MOVE         = 0;
+    g_CONTROL.STATE                 = IDLING;
 }
 
 /******************************************************************************/
@@ -124,7 +144,7 @@ FUNC(void, SeatAdjuster_CODE) InitElectricSeatControl( VAR(void, AUTOMATIC) )
 /* Return      :                                                              */
 /* Contents    : Process command signal received from Seat Adjuster SWC       */
 /* Author      :                                                              */
-/* Note        :                                                              */
+/* Note        : This function read command signal from                                                          */
 /******************************************************************************/
 FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
 {
@@ -134,40 +154,40 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
     if (IDLING == g_CONTROL.STATE)
     {
         Rte_Read_RP_PositionData_ReceivePosition(&command);
-        /* Get type of command to handle */
         command_type = GetCommandType(command);
 
-        if (MOVE_COMMAND == command_type)
+        switch (command_type)
         {
-            /* Send command to Motor */
-            Rte_Write_PP_PositionCommand_SendCommand(command);
-            /* Adjust Controller Position */
-            UpdatePosition(command);
-        }
-        else if (MEMORY_READ_COMMAND == command_type)
-        {
-            seat_positon_t setting_position;
-            uint32_t blockid = GetMemoryId(command);
-            Rte_Call_RP_MemorySeat_NvM_ReadBlock(blockid, &setting_position);
-            if (   setting_position.SEAT_POS     == g_CONTROL.POSITION.SEAT_POS
-                && setting_position.BACKREST_POS == g_CONTROL.POSITION.BACKREST_POS )
-            {
-                /* No chaging in position, do nothing */
-            }
-            else
-            {
-                /* Start Adjusting Sequence */
-                StartAdjusting(setting_position);
-            }
-        }
-        else if (MEMORY_WRITE_COMMAND == command_type)
-        {
-            uint32_t blockid = GetMemoryId(command);
-            Rte_Call_RP_MemorySeat_NvM_WriteBlock(blockid, cur_position);
-        }
-        else
-        {
-            /* MISRA */
+            case MOVE_COMMAND:
+                if (UpdatePosition(command) == MOVE_OK)
+                {
+                    Rte_Write_PP_PositionCommand_SendCommand(command);
+                }
+                else
+                {
+                    /* Cannot move further, do nothing */
+                }
+                break;
+
+            case MEMORY_READ_COMMAND:
+                seat_position_t setting_position;
+                uint32_t blockid = GetMemoryId(command);
+                Rte_Call_RP_MemorySeat_NvM_ReadBlock(blockid, &setting_position);
+                if (setting_position.SEAT_POS     != g_CONTROL.POSITION.SEAT_POS ||
+                    setting_position.BACKREST_POS != g_CONTROL.POSITION.BACKREST_POS)
+                {
+                    StartAdjusting(setting_position);
+                }
+                break;
+
+            case MEMORY_WRITE_COMMAND:
+                uint32_t blockid = GetMemoryId(command);
+                Rte_Call_RP_MemorySeat_NvM_WriteBlock(blockid, g_CONTROL.POSITION);
+                break;
+
+            default:
+                /* Do nothing */
+                break;
         }
     }
     else /* ADJUSTING == g_CONTROL.STATE */

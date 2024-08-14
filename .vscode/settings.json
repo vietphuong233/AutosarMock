@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "rte_electricseatcontrol.h": "c",
-        "rte_seatadjustment.h": "c"
+        "rte_seatadjustment.h": "c",
+        "electric_seat_control_swc.h": "c"
     }
 }

@@ -2,8 +2,7 @@
 /* include headers                                                            */
 /*----------------------------------------------------------------------------*/
 #include "Seat_Motor_Control_SWC.h"
-#include "Rte_.h"
-
+#include "Rte_MotorControl.h"
 
 /*----------------------------------------------------------------------------*/
 /* private functions                                                          */
@@ -22,25 +21,26 @@ FUNC(void, MotorControl_CODE) HandlePositionCommand_10ms( VAR(void, AUTOMATIC) )
         Rte_Read_RP_PositionCommand_Command(&command);
         abcxyz = 0;
 
-        if (MOVE_FORWARD_COMMAND == command)
+        switch (command)
         {
+        case MOVE_FORWARD_COMMAND:
+            Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward();
+            break;
+        case MOVE_BACKWARD_COMMAND:
+            Rte_Call_RP_MotorControl_IoHwAbSeatMoveBack();
+            break;
 
-        }
-        else if (MOVE_BACKWARD_COMMAND == command)
-        {
+        case FOLD_COMMAND:
+            IoHwAb_BackSeatFold();
+            break;
 
-        }
-        else if (FOLD_COMMAND == command)
-        {
+        case UNFOLD_COMMAND:
+            IoHwAb_BackSeatUnFold();
+            break;
 
-        }
-        else if (UNFOLD_COMMAND == command)
-        {
-
-        }
-        else
-        {
-            /* MISRA */
+        default:
+            /* Do nothing */
+            break;
         }
     }
 

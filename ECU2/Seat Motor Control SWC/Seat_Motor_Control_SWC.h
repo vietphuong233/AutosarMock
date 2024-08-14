@@ -9,19 +9,14 @@
 /* definitions                                                                */
 /*----------------------------------------------------------------------------*/
 
-/* Type definition */
-#define io_signal       uint8_t
-#define command_signal  uint8_t
-#define IO_CHANNEL_GROUP_1   /* Simulate IO channel group */
-
 /* Command Signal Definitions */
-#define MOVE_FORWARD_COMMAND   (command_signal)0x40u
-#define MOVE_BACKWARD_COMMAND  (command_signal)0x80u
-#define FOLD_COMMAND           (command_signal)0x10u
-#define UNFOLD_COMMAND         (command_signal)0x20u
-#define SET_MODE_COMMAND       (command_signal)0x04u
-#define MODE1_COMMAND          (command_signal)0x08u
-#define MODE2_COMMAND          (command_signal)0x0Cu
+#define MOVE_FORWARD_COMMAND   0x40u
+#define MOVE_BACKWARD_COMMAND  0x80u
+#define FOLD_COMMAND           0x10u
+#define UNFOLD_COMMAND         0x20u
+#define SET_MODE_COMMAND       0x04u
+#define MODE1_COMMAND          0x08u
+#define MODE2_COMMAND          0x0Cu
 
 
 
