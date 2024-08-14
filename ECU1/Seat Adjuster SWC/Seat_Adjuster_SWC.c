@@ -2,7 +2,7 @@
 /* include headers                                                            */
 /*----------------------------------------------------------------------------*/
 #include "Seat_Adjuster_SWC.h"
-#include "Rte_.h"
+#include "Rte_SeatAdjustment.h"
 
 /*----------------------------------------------------------------------------*/
 /* functions prototypes                                                       */
@@ -64,11 +64,11 @@ FUNC(void, SeatAdjuster_CODE) HandleAdjusterSignal_10ms( VAR(void, AUTOMATIC) )
 	static io_signal      ioData  = 0;
     static command_signal command = 0;
 
-    Rte_Call_RP_AdjusterData_GetData(IO_CHANNEL_GROUP_1, &ioData);
+    Rte_Call_RP_AdjustData_IoHwAb_DioReadChannelGroup(IO_CHANNEL_GROUP_1, &ioData);
 
     command = GetCommand( ioData );
 
-    Rte_Write_PP_PositionData_Position(command);
+    Rte_Write_PP_PositionData_SendPosition(command);
 
     /* Simulate Watchdog checkpoint */
     WdgM_CheckpointReached(se_id, cp_id);

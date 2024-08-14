@@ -50,8 +50,17 @@ typedef struct _seat_control
 #define CHECK_MEMORY_COMMAND(x)       (((uint8_t)(((uint8_t)(x))>>MEM_COMMAND_SHIFT))&MEM_MASK)
 
 /* Block ID definitions */
-#define BLOCKID1    /* Simulate NvMBlock ID for setting 1 */
-#define BLOCKID2    /* Simulate NvMBlock ID for setting 2 */
+#define BLOCKID1    0x01U/* Simulate NvMBlock ID for setting 1             */
+#define BLOCKID2    0x02U/* Simulate NvMBlock ID for setting 2             */
+#define BLOCKIDOLD  0x03U/* Simulate NvMBlock ID for latest saved position */
+
+/*----------------------------------------------------------------------------*/
+/* runnables                                                                  */
+/*----------------------------------------------------------------------------*/
+
+FUNC(void, SeatAdjuster_CODE) InitElectricSeatControl( VAR(void, AUTOMATIC) );
+
+FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) );
 
 #endif /* ELECTRIC_SEAT_CONTROL_SWC_H */
 

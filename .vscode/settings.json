@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "rte_electricseatcontrol.h": "c",
+        "rte_seatadjustment.h": "c"
+    }
+}

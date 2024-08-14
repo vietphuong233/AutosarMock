@@ -32,13 +32,13 @@
 #define MODE2_CHECK(x)      (((uint8_t)(((uint8_t)(x))>>UNFOLD_SHIFT))&CHECK_MASK)
 
 /* Command Signal Definitions */
-#define MOVE_FORWARD_SIGNAL     (command_signal)0x40u
-#define MOVE_BACKWARD_SIGNAL    (command_signal)0x80u
-#define FOLD_SIGNAL             (command_signal)0x10u
-#define UNFOLD_SIGNAL           (command_signal)0x20u
-#define SET_MODE_SIGNAL         (command_signal)0x04u
-#define MODE1_SIGNAL            (command_signal)0x08u
-#define MODE2_SIGNAL            (command_signal)0x0Cu
+#define MOVE_FORWARD_SIGNAL     0x40U
+#define MOVE_BACKWARD_SIGNAL    0x80U
+#define FOLD_SIGNAL             0x10U
+#define UNFOLD_SIGNAL           0x20U
+#define SET_MODE_SIGNAL         0x04U
+#define MODE1_SIGNAL            0x08U
+#define MODE2_SIGNAL            0x0CU
 
 /*----------------------------------------------------------------------------*/
 /* runnables                                                                  */
