@@ -1,6 +1,14 @@
 #ifndef RTE_ELECTRICSEATCONTROL_H
 #define RTE_ELECTRICSEATCONTROL_H
 
+/*----------------------------------------------------------------------------*/
+/* include headers                                                            */
+/*----------------------------------------------------------------------------*/
+#include "Rte_ElectricSeatControl_Type.h"
+
+/*----------------------------------------------------------------------------*/
+/* RTE API Declaration                                                        */
+/*----------------------------------------------------------------------------*/
 
 extern FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Read_RP_PositionData_ReceivePosition( P2VAR(AUTOSAR_uint8, AUTOMATIC, RTE_APPL_DATA) data );
 #define Rte_Read_RP_PositionData_ReceivePosition    Rte_Read_ReceivePosition

@@ -1,8 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /* include headers                                                            */
 /*----------------------------------------------------------------------------*/
-#include "Seat_Adjuster_SWC.h"
-#include "Rte_SeatAdjustment.h"
+#include "Rte_SeatAdjuster.h"
 
 /*----------------------------------------------------------------------------*/
 /* functions prototypes                                                       */
@@ -12,7 +11,7 @@
 /* private functions                                                          */
 /*----------------------------------------------------------------------------*/
 
-command_signal GetCommand( ioData )
+static command_signal GetCommand( ioData )
 {
     command_signal return_value = 0x00u;
 

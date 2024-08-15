@@ -1,6 +1,15 @@
 #ifndef RTE_MOTORCONTROL_H
 #define RTE_MOTORCONTROL_H
 
+/*----------------------------------------------------------------------------*/
+/* include headers                                                            */
+/*----------------------------------------------------------------------------*/
+#include "Rte_MotorControl_Type.h"
+
+/*----------------------------------------------------------------------------*/
+/* RTE API Declaration                                                        */
+/*----------------------------------------------------------------------------*/
+
 extern FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward( void );
 #define Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward Rte_Call_IoHwAb_SeatMoveForward
 
