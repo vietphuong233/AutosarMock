@@ -4,13 +4,18 @@
 #include "Rte_SeatAdjuster.h"
 
 /*----------------------------------------------------------------------------*/
-/* functions prototypes                                                       */
-/*----------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------*/
 /* private functions                                                          */
 /*----------------------------------------------------------------------------*/
 
+/******************************************************************************/
+/* Name        : GetCommand                                                   */
+/* Param       : ioData         : io signal from Hardware Abstraction         */
+/* Return      : command signal : generated command signal                    */
+/* Contents    : Handle IO signal from Hardware Abstraction                   */
+/* Author      :                                                              */
+/* Note        : This function read io signal from Hardware abstraction then  */
+/*               generate corresponding command signal with bit macros        */
+/******************************************************************************/
 static command_signal GetCommand( ioData )
 {
     command_signal return_value = 0x00u;
@@ -58,6 +63,16 @@ static command_signal GetCommand( ioData )
 /* runnables                                                                  */
 /*----------------------------------------------------------------------------*/
 
+/******************************************************************************/
+/* Name        : HandleAdjusterSignal_10ms                                    */
+/* Param       :                                                              */
+/* Return      :                                                              */
+/* Contents    : Handle IO signal from Hardware Abstraction                   */
+/* Author      :                                                              */
+/* Note        : This function read io signal from Hardware abstraction:      */
+/*               1 byte signal with each bit for each button pins, then create*/
+/*               command signal to send to Electric Seat Control SWC          */
+/******************************************************************************/
 FUNC(void, SeatAdjuster_CODE) HandleAdjusterSignal_10ms( VAR(void, AUTOMATIC) )
 {
 	static io_signal      ioData  = 0;
@@ -70,7 +85,7 @@ FUNC(void, SeatAdjuster_CODE) HandleAdjusterSignal_10ms( VAR(void, AUTOMATIC) )
     Rte_Write_PP_PositionData_SendPosition(command);
 
     /* Simulate Watchdog checkpoint */
-    WdgM_CheckpointReached(se_id, cp_id);
+    Rte_Call_WdgMCheckpointReached(se_id, cp_id);
 }
 
 /* End of Seat_Adjuster.c */

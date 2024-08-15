@@ -29,3 +29,5 @@ extern FUNC(void, RTE_CODE_EcucPartition_0) Rte_HandlePositionCommand_10ms( VAR(
 Rte_COMCbk_ComIPdu_SeatBsw_CAN_HS_CAN_CommandReq( void );
 
 #endif /* RTE_MOTORCONTROL_H */
+
+/* End of Rte_MotorControl.h */
