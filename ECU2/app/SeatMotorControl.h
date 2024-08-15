@@ -1,5 +1,5 @@
-#ifndef SEAT_MOTOR_CONTROL_SWC_H
-#define SEAT_MOTOR_CONTROL_SWC_H
+#ifndef SEATMOTORCONTROL_H
+#define SEATMOTORCONTROL_H
 
 /*----------------------------------------------------------------------------*/
 /* include headers                                                            */
@@ -23,6 +23,6 @@
 
 
 
-#endif /* SEAT_MOTOR_CONTROL_SWC_H */
+#endif /* SEATMOTORCONTROL_H */
 
-/* End of Seat_Motor_Control.h */
+/* End of SeatMotorControl.h */

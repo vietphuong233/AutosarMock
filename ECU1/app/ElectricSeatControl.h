@@ -1,5 +1,5 @@
-#ifndef ELECTRIC_SEAT_CONTROL_SWC_H
-#define ELECTRIC_SEAT_CONTROL_SWC_H
+#ifndef ELECTRICSEATCONTROL_H
+#define ELECTRICSEATCONTROL_H
 
 /*----------------------------------------------------------------------------*/
 /* include headers                                                            */
@@ -76,6 +76,6 @@ command_type_t GetCommandType( command_signal command );
 void StartAdjusting(seat_positon_t new_positon);
 uint32_t GetMemoryId(command_signal command)
 
-#endif /* ELECTRIC_SEAT_CONTROL_SWC_H */
+#endif /* ELECTRICSEATCONTROL_H */
 
-/* End of Electric_Seat_Control.h */
+/* End of ElectricSeatControl.h */

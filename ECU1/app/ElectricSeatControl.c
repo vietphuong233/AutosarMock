@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------------------*/
 /* include headers                                                            */
 /*----------------------------------------------------------------------------*/
-#include "Seat_Adjuster_SWC.h"
-#include "Electric_Seat_Control_SWC.h"
+#include "SeatAdjuster.h"
+#include "ElectricSeatControl.h"
 #include "Rte_ElectricSeatControl.h"
 
 /*----------------------------------------------------------------------------*/

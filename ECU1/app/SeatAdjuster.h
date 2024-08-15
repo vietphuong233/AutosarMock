@@ -1,5 +1,5 @@
-#ifndef SEAT_ADJUSTER_SWC_H
-#define SEAT_ADJUSTER_SWC_H
+#ifndef SEATADJUSTER_H
+#define SEATADJUSTER_H
 
 /*----------------------------------------------------------------------------*/
 /* include headers                                                            */
@@ -49,4 +49,4 @@ FUNC(void, HandleAdjusterSignal_CODE) HandleAdjusterSignal_10ms( void );
 
 #endif /* SEAT_ADJUSTER_SWC_H */
 
-/* End of Seat_Adjuster.h */
+/* End of SeatAdjuster.h */
