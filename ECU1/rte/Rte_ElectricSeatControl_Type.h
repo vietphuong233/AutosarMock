@@ -1,9 +1,10 @@
-#ifndef ELECTRICSEATCONTROL_H
-#define ELECTRICSEATCONTROL_H
+#ifndef RTE_ELECTRICSEATCONTROL_TYPE_H
+#define RTE_ELECTRICSEATCONTROL_TYPE_H
 
 /*----------------------------------------------------------------------------*/
 /* include headers                                                            */
 /*----------------------------------------------------------------------------*/
+#include "Rte_Type.h"
 
 /*----------------------------------------------------------------------------*/
 /* definitions                                                                */
@@ -61,21 +62,6 @@ typedef struct _seat_control
 #define BLOCKID2    0x02U/* Simulate NvMBlock ID for setting 2             */
 #define BLOCKIDOLD  0x03U/* Simulate NvMBlock ID for latest saved position */
 
-/*----------------------------------------------------------------------------*/
-/* runnables                                                                  */
-/*----------------------------------------------------------------------------*/
+#endif /* ELECTRICSEATCONTROL_TYPE_H */
 
-FUNC(void, SeatAdjuster_CODE) InitElectricSeatControl( VAR(void, AUTOMATIC) );
-
-FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) );
-
-/*----------------------------------------------------------------------------*/
-/* private functions prototypes                                               */
-/*----------------------------------------------------------------------------*/
-command_type_t GetCommandType( command_signal command );
-void StartAdjusting(seat_positon_t new_positon);
-uint32_t GetMemoryId(command_signal command)
-
-#endif /* ELECTRICSEATCONTROL_H */
-
-/* End of ElectricSeatControl.h */
+/* End of Rte_ElectricSeatControl_Type.h */

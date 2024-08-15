@@ -1,9 +1,10 @@
-#ifndef SEATMOTORCONTROL_H
-#define SEATMOTORCONTROL_H
+#ifndef RTE_MOTOR_CONTROL_TYPE_H
+#define RTE_MOTOR_CONTROL_TYPE_H
 
 /*----------------------------------------------------------------------------*/
 /* include headers                                                            */
 /*----------------------------------------------------------------------------*/
+#include "Std_Type.h"
 
 /*----------------------------------------------------------------------------*/
 /* definitions                                                                */
@@ -21,8 +22,6 @@
 #define MODE1_COMMAND          0x08u
 #define MODE2_COMMAND          0x0Cu
 
+#endif /* RTE_MOTOR_CONTROL_TYPE_H */
 
-
-#endif /* SEATMOTORCONTROL_H */
-
-/* End of SeatMotorControl.h */
+/* End of Rte_MotorControl_Type.h */

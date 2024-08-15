@@ -1,9 +1,8 @@
 /*----------------------------------------------------------------------------*/
 /* include headers                                                            */
 /*----------------------------------------------------------------------------*/
-#include "SeatAdjuster.h"
-#include "ElectricSeatControl.h"
 #include "Rte_ElectricSeatControl.h"
+#include "Rte_SeatAdjuster.h"
 
 /*----------------------------------------------------------------------------*/
 /* variables                                                                  */
@@ -16,7 +15,7 @@ static seat_position_t g_MAX_POSITION;
 /* private functions                                                          */
 /*----------------------------------------------------------------------------*/
 
-command_type_t GetCommandType( command_signal command )
+static command_type_t GetCommandType( command_signal command )
 {
     command_type_t return_value = MOVE_COMMAND;
 
@@ -43,7 +42,7 @@ command_type_t GetCommandType( command_signal command )
     return return_value;
 }
 
-position_status_t UpdatePosition(command_signal command)
+static position_status_t UpdatePosition(command_signal command)
 {
     position_status_t return_value = MOVE_OK;
 
@@ -83,14 +82,14 @@ position_status_t UpdatePosition(command_signal command)
     return return_value;
 }
 
-void StartAdjusting(seat_position_t new_positon)
+static void StartAdjusting(seat_position_t new_positon)
 {
     g_CONTROL.SEAT_MOVE     = new_positon.SEAT_POS - g_CONTROL.POSITION.SEAT_POS;
     g_CONTROL.BACKREST_MOVE = new_positon.BACKREST_POS - g_CONTROL.POSITION.BACKREST_POS;
     g_CONTROL.STATE         = ADJUSTING;
 }
 
-uint32_t GetMemoryId(command_signal command)
+static uint32_t GetMemoryId(command_signal command)
 {
     uint32_t return_value = 0;
 

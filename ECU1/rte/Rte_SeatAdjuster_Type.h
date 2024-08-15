@@ -1,9 +1,10 @@
-#ifndef SEATADJUSTER_H
-#define SEATADJUSTER_H
+#ifndef RTE_SEATADJUSTER_TYPE_H
+#define RTE_SEATADJUSTER_TYPE_H
 
 /*----------------------------------------------------------------------------*/
 /* include headers                                                            */
 /*----------------------------------------------------------------------------*/
+#include "Std_Type.h"
 
 /*----------------------------------------------------------------------------*/
 /* definitions                                                                */
@@ -40,13 +41,6 @@
 #define MODE1_SIGNAL            0x08U
 #define MODE2_SIGNAL            0x0CU
 
-/*----------------------------------------------------------------------------*/
-/* runnables                                                                  */
-/*----------------------------------------------------------------------------*/
+#endif /* RTE_SEATADJUSTER_TYPE_H */
 
-FUNC(void, HandleAdjusterSignal_CODE) HandleAdjusterSignal_10ms( void );
-
-
-#endif /* SEAT_ADJUSTER_SWC_H */
-
-/* End of SeatAdjuster.h */
+/* End of Rte_SeatAdjuster_Type.h */
