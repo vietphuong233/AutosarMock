@@ -127,11 +127,6 @@ FUNC(void, RTE_CODE_EcucPartition_0) Rte_COMCbk_CommandSignal( void )
 {
     if (Rte_InitState == RTE_STATE_INIT)
     {
-        (void)GetSpinlock(Rte_Spinlock_CommandSignal);
-        // (void)Com_ReceiveSignalGroup(ComConf_ComSignalGroup_CommandSignal);
         (void)Com_ReceiveSignal(ComConf_ComSignal_ComISignal_HS_CAN1_CommandSignal, &Rte_CommanSignal);
-        // (void)Rte_QMApplication_Core2_RxUpdate_NetASIL_LOT_ADataRawSafe_LOT_ADataRawSafe_Sender = 1;
-        // (void)Rte_Update_Command = 1;
-        (void)ReleaseSpinlock(Rte_Spinlock_CommandSignal);
     }	
 }

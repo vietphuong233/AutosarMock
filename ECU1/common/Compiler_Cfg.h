@@ -426,4 +426,12 @@
 #define IPDUM_VAR_FAST            /* Globals or statics which require fast or bitwise access.         */
 #define IPDUM_VAR                 /* Globals or statics which are initialized after every reset.      */
 
+/* -------------------------------------------------------------------------- */
+/*                                  SWC                                       */
+/* -------------------------------------------------------------------------- */
+
+#define ElectricSeatControl_CODE
+#define SeatAjuster_CODE
+#define IoHwAb_CODE
+
 #endif /* COMPILER_CFG_H */

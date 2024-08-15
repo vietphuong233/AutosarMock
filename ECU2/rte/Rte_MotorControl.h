@@ -7,9 +7,8 @@
 #include "Rte_MotorControl_Type.h"
 
 /*----------------------------------------------------------------------------*/
-/* RTE API Declaration                                                        */
+/* RTE APIs Prototype Declaration                                             */
 /*----------------------------------------------------------------------------*/
-
 extern FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward( void );
 #define Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward Rte_Call_IoHwAb_SeatMoveForward
 
@@ -24,8 +23,9 @@ extern FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MotorControl_I
 extern FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Read_RP_PositionCommand_Command( P2VAR(AUTOSAR_uint8, AUTOMATIC, RTE_APPL_DATA) command );
 #define Rte_Read_RP_PositionCommand_ReceiveCommand      Rte_Read_ReceiveCommand
 
+/*----------------------------------------------------------------------------*/
+/* Runnables Prototype Declaration                                            */
+/*----------------------------------------------------------------------------*/
 extern FUNC(void, RTE_CODE_EcucPartition_0) Rte_HandlePositionCommand_10ms( VAR(void, AUTOMATIC) );
-
-Rte_COMCbk_ComIPdu_SeatBsw_CAN_HS_CAN_CommandReq( void );
 
 #endif /* RTE_MOTORCONTROL_H */
