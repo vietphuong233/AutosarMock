@@ -16,7 +16,7 @@
 /* Note        : This function read io signal from Hardware abstraction then  */
 /*               generate corresponding command signal with bit macros        */
 /******************************************************************************/
-static command_signal GetCommand( ioData )
+static command_signal GetCommand( const io_signal ioData )
 {
     command_signal return_value = 0x00u;
 

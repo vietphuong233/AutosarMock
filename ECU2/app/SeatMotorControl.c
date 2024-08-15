@@ -7,6 +7,15 @@
 /* runnables                                                                  */
 /*----------------------------------------------------------------------------*/
 
+/******************************************************************************/
+/* Name        : HandlePositionCommand_10ms                                   */
+/* Param       :                                                              */
+/* Return      :                                                              */
+/* Contents    : Read command signal then call corresponding hardware API     */
+/* Author      :                                                              */
+/* Note        : This runnable read command signal sent from Adjuster ECU     */
+/*               then call the corressponding Motor Hardware Abstraction API  */
+/******************************************************************************/
 FUNC(void, MotorControl_CODE) HandlePositionCommand_10ms( VAR(void, AUTOMATIC) )
 {
     command_signal command = 0;

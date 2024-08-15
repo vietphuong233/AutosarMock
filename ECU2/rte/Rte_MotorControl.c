@@ -3,13 +3,10 @@
 
 extern FUNC(void, IoHwAb_CODE) IoHwAb_SeatMoveForward( VAR(void, AUTOMATIC));
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
 /* Name        : Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward              */
 /* Param       :                                                              */
 /* Return      :                                                              */
 /* Contents    : Call IoHwAb to move seat forward                             */
-/* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
 FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward( VAR(void, AUTOMATIC) ) {
@@ -22,13 +19,10 @@ FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MotorControl_IoHwAb_S
 
 extern FUNC(void, IoHwAb_CODE) IoHwAb_SeatMoveBack( VAR(void, AUTOMATIC));
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
 /* Name        : Rte_Call_RP_MotorControl_IoHwAb_SeatMoveBack                 */
 /* Param       :                                                              */
 /* Return      :                                                              */
 /* Contents    : Call IoHwAb to move seat back                                */
-/* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
 FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MotorControl_IoHwAbSeatMoveBack( VAR(void, AUTOMATIC) ) {
@@ -133,5 +127,5 @@ FUNC(void, RTE_CODE_EcucPartition_0) Rte_COMCbk_CommandSignal( void )
         // (void)Rte_QMApplication_Core2_RxUpdate_NetASIL_LOT_ADataRawSafe_LOT_ADataRawSafe_Sender = 1;
         // (void)Rte_Update_Command = 1;
         (void)ReleaseSpinlock(Rte_Spinlock_CommandSignal);
-    }	
+    }
 }

@@ -25,7 +25,7 @@ static seat_position_t g_MAX_POSITION;    /* Max position allowed */
 /*               base on the bit field. If signal is empty (0x00), the type   */
 /*               is still move command, but its move nothing                  */
 /******************************************************************************/
-static command_type_t GetCommandType( command_signal command )
+static command_type_t GetCommandType( const command_signal command )
 {
     command_type_t return_value = MOVE_COMMAND;
 
@@ -62,7 +62,7 @@ static command_type_t GetCommandType( command_signal command )
 /*               for possibility to move, then update g_CONTROL.POSITION and  */
 /*               return movable status                                        */
 /******************************************************************************/
-static position_status_t UpdatePosition(command_signal command)
+static position_status_t UpdatePosition( const command_signal command )
 {
     position_status_t return_value = MOVE_OK;
 
@@ -114,7 +114,7 @@ static position_status_t UpdatePosition(command_signal command)
 /*               g_CONTROL.SEAT_MOVE and g_CONTROL.BACKREST_MOVE, then start  */
 /*               the adjusting sequence by set g_CONTROL.STATE to ADJUSTING   */
 /******************************************************************************/
-static void StartAdjusting(seat_position_t new_positon)
+static void StartAdjusting( const seat_position_t new_positon )
 {
     g_CONTROL.SEAT_MOVE     = new_positon.SEAT_POS - g_CONTROL.POSITION.SEAT_POS;
     g_CONTROL.BACKREST_MOVE = new_positon.BACKREST_POS - g_CONTROL.POSITION.BACKREST_POS;
@@ -131,7 +131,7 @@ static void StartAdjusting(seat_position_t new_positon)
 /*                   if command read button setting 1 -> BLOCKID1             */
 /*                   if command read button setting 2 -> BLOCKID2             */
 /******************************************************************************/
-static uint32_t GetMemoryId(command_signal command)
+static uint32_t GetMemoryId( const command_signal command )
 {
     uint32_t return_value = 0;
 

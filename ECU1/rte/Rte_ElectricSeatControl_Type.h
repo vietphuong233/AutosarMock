@@ -58,9 +58,9 @@ typedef struct _seat_control
 #define CHECK_MEMORY_COMMAND(x)       (((uint8_t)(((uint8_t)(x))>>MEM_COMMAND_SHIFT))&MEM_MASK)
 
 /* Block ID definitions */
-#define BLOCKID1    0x01U/* Simulate NvMBlock ID for setting 1             */
-#define BLOCKID2    0x02U/* Simulate NvMBlock ID for setting 2             */
-#define BLOCKIDOLD  0x03U/* Simulate NvMBlock ID for latest saved position */
+#define BLOCKID1    0x01U   /* Simulate NvMBlock ID for setting 1             */
+#define BLOCKID2    0x02U   /* Simulate NvMBlock ID for setting 2             */
+#define BLOCKIDOLD  0x03U   /* Simulate NvMBlock ID for latest saved position */
 
 #endif /* ELECTRICSEATCONTROL_TYPE_H */
 
