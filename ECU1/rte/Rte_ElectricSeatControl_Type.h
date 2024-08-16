@@ -32,6 +32,15 @@ typedef enum _seat_state
     IDLING,       /* Waiting for command      */
 } seat_state_t;
 
+/* Setting mode number */
+typedef enum _setting_mode
+{
+    NO_SETTING,       /* No button dectected */
+    SETTING_MODE1,    /* Setting from button 1 */
+    SETTING_MODE2,    /* Setting from button 2 */
+} setting_mode_t;
+
+
 /* Seat position definition */
 typedef struct _seat_position
 {
@@ -49,6 +58,13 @@ typedef struct _seat_control
     seat_state_t    STATE;          /* Current State */
 } seat_control_t;
 
+/* Setting data on NvM */
+typedef struct _setting_data
+{
+    seat_position_t MODE1_DATA;
+    seat_position_t MODE2_DATA;
+} setting_data_t;
+
 /* Check command type macros */
 #define MOVE_MASK                     0x0Fu
 #define MOVE_COMMAND_SHIFT            4u
@@ -56,11 +72,6 @@ typedef struct _seat_control
 #define MEM_MASK                      0x03u
 #define MEM_COMMAND_SHIFT             2u
 #define CHECK_MEMORY_COMMAND(x)       (((uint8_t)(((uint8_t)(x))>>MEM_COMMAND_SHIFT))&MEM_MASK)
-
-/* Block ID definitions */
-#define BLOCKID1    0x01U   /* Simulate NvMBlock ID for setting 1             */
-#define BLOCKID2    0x02U   /* Simulate NvMBlock ID for setting 2             */
-#define BLOCKIDOLD  0x03U   /* Simulate NvMBlock ID for latest saved position */
 
 #endif /* ELECTRICSEATCONTROL_TYPE_H */
 

@@ -122,28 +122,65 @@ static void StartAdjusting( const seat_position_t new_positon )
 }
 
 /******************************************************************************/
-/* Name        : GetMemoryId                                                  */
-/* Param       : command    : command signal received                         */
-/* Return      : NvMBlockID : simulated NvMBlockID                            */
+/* Name        : GetSettingMode                                               */
+/* Param       : command      : command signal received                       */
+/* Return      : setting mode : setting from button 1 or 2                    */
 /* Contents    : Check command for corresponding NvMBlock ID                  */
 /* Author      :                                                              */
-/* Note        : This function read command signal to return the block ID:    */
-/*                   if command read button setting 1 -> BLOCKID1             */
-/*                   if command read button setting 2 -> BLOCKID2             */
+/* Note        : This function read command signal to return the setting mode:*/
+/*                   if command read button setting 1 -> SETTING_MODE1        */
+/*                   if command read button setting 2 -> SETTING_MODE2        */
 /******************************************************************************/
-static uint32_t GetMemoryId( const command_signal command )
+static setting_mode_t GetSettingMode( const command_signal command )
 {
-    uint32_t return_value = 0;
+    setting_mode_t return_value = NO_SETTING;
 
     switch (command)
     {
         case MODE1_SIGNAL:
-            return_value = BLOCKID1;
+            return_value = SETTING_MODE1;
             break;
         case MODE2_SIGNAL:
-            return_value = BLOCKID2;
+            return_value = SETTING_MODE2;
             break;
         default:
+            /* Do nothing */
+            break;
+    }
+
+    return return_value;
+}
+
+/******************************************************************************/
+/* Name        : GetSettingMode                                               */
+/* Param       : mem_data : data read from Nv Memory                          */
+/* Param       : mode     : setting mode read from setting button             */
+/* Return      : position : position read from memory data                    */
+/* Contents    : Extract seat position from memory data read in Nv Memory     */
+/* Author      :                                                              */
+/* Note        : This function extract seat position from memory data in      */
+/*               Nv Memory, by decide from setting mode:                      */
+/*                   if setting mode 1 -> read position from meme data 1      */
+/*                   if setting mode 2 -> read position from meme data 2      */
+/******************************************************************************/
+static seat_position_t GetPosition(const setting_data_t mem_data,
+                                   const setting_mode_t mode)
+{
+    seat_position_t return_value = {0, 0};
+
+    switch (mode)
+    {
+        case SETTING_MODE1:
+            return_value.SEAT_POS     = mem_data.MODE1_DATA.SEAT_POS;
+            return_value.BACKREST_POS = mem_data.MODE1_DATA.BACKREST_POS;
+            break;
+
+        case SETTING_MODE2:
+            return_value.SEAT_POS     = mem_data.MODE2_DATA.SEAT_POS;
+            return_value.BACKREST_POS = mem_data.MODE2_DATA.BACKREST_POS;
+            break;
+
+        default
             /* Do nothing */
             break;
     }
@@ -195,8 +232,11 @@ FUNC(void, SeatAdjuster_CODE) InitElectricSeatControl( VAR(void, AUTOMATIC) )
 /******************************************************************************/
 FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
 {
-    static command_signal command;
-    static command_type_t command_type;
+    static command_signal  command;
+    static command_type_t  command_type;
+    static setting_mode_t  mode = GetSettingMode(command); /* Check mode */
+    static seat_position_t setting_position;    /* Position data holder */
+    static setting_data_t  mem_data;            /* Memory data holder */
 
     if (IDLING == g_CONTROL.STATE)
     {
@@ -217,9 +257,10 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
                 break;
 
             case MEMORY_READ_COMMAND:
-                seat_position_t setting_position;
-                uint32_t blockid = GetMemoryId(command);
-                Rte_Call_RP_MemorySeat_NvM_ReadBlock(blockid, &setting_position);
+                /* Read NvM block to mem_data */
+                Rte_Call_RP_MemorySeat_NvM_ReadBlock( (uint16_t*)(&mem_data) );
+                /* Copy data to setting_position */
+                setting_position = GetPosition(mem_data, mode);
                 /* Check if setting and current position is the same */
                 if (setting_position.SEAT_POS     != g_CONTROL.POSITION.SEAT_POS ||
                     setting_position.BACKREST_POS != g_CONTROL.POSITION.BACKREST_POS)
@@ -229,8 +270,27 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
                 break;
 
             case MEMORY_WRITE_COMMAND:
-                uint32_t blockid = GetMemoryId(command);
-                Rte_Call_RP_MemorySeat_NvM_WriteBlock(blockid, g_CONTROL.POSITION);
+                /* Read NvM block to mem_data */
+                Rte_Call_RP_MemorySeat_NvM_ReadBlock( (uint16_t*)(&mem_data) );
+                /* Update new position to mem_data */
+                    switch (mode)
+                    {
+                        case SETTING_MODE1:
+                            mem_data.MODE1_DATA.SEAT_POS     = g_CONTROL.POSITION.SEAT_POS;
+                            mem_data.MODE1_DATA.BACKREST_POS = g_CONTROL.POSITION.BACKREST_POS;
+                            break;
+
+                        case SETTING_MODE2:
+                            mem_data.MODE2_DATA.SEAT_POS     = g_CONTROL.POSITION.SEAT_POS;
+                            mem_data.MODE2_DATA.BACKREST_POS = g_CONTROL.POSITION.BACKREST_POS;
+                            break;
+
+                        default
+                            /* Do nothing */
+                            break;
+                    }
+                /* Write new data to NvM  */
+                Rte_Call_RP_MemorySeat_NvM_WriteBlock( (uint16_t*)(&mem_data) );
                 break;
 
             default:
@@ -274,6 +334,9 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
             g_CONTROL.STATE = IDLING;
         }
     }
+
+    /* Save current position to Nv Memory */
+
 
     /* Simulate Watchdog checkpoint */
     Rte_Call_WdgMCheckpointReached(se_id, cp_id);
