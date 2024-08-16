@@ -273,22 +273,22 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
                 /* Read NvM block to mem_data */
                 Rte_Call_RP_MemorySeat_NvM_ReadBlock( (uint16_t*)(&mem_data) );
                 /* Update new position to mem_data */
-                    switch (mode)
-                    {
-                        case SETTING_MODE1:
-                            mem_data.MODE1_DATA.SEAT_POS     = g_CONTROL.POSITION.SEAT_POS;
-                            mem_data.MODE1_DATA.BACKREST_POS = g_CONTROL.POSITION.BACKREST_POS;
-                            break;
+                switch (mode)
+                {
+                    case SETTING_MODE1:
+                        mem_data.MODE1_DATA.SEAT_POS     = g_CONTROL.POSITION.SEAT_POS;
+                        mem_data.MODE1_DATA.BACKREST_POS = g_CONTROL.POSITION.BACKREST_POS;
+                        break;
 
-                        case SETTING_MODE2:
-                            mem_data.MODE2_DATA.SEAT_POS     = g_CONTROL.POSITION.SEAT_POS;
-                            mem_data.MODE2_DATA.BACKREST_POS = g_CONTROL.POSITION.BACKREST_POS;
-                            break;
+                    case SETTING_MODE2:
+                        mem_data.MODE2_DATA.SEAT_POS     = g_CONTROL.POSITION.SEAT_POS;
+                        mem_data.MODE2_DATA.BACKREST_POS = g_CONTROL.POSITION.BACKREST_POS;
+                        break;
 
-                        default
-                            /* Do nothing */
-                            break;
-                    }
+                    default
+                        /* Do nothing */
+                        break;
+                }
                 /* Write new data to NvM  */
                 Rte_Call_RP_MemorySeat_NvM_WriteBlock( (uint16_t*)(&mem_data) );
                 break;
