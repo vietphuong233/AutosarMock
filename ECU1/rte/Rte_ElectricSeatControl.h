@@ -18,11 +18,17 @@ extern FUNC(Std_ReturnType, RTE_CODE) Rte_Write_PP_PositionCommand_SendCommand( 
 extern FUNC(Std_ReturnType, RTE_CODE) Rte_Read_RP_Parameter_ReceiveCalibParam( P2VAR(AUTOSAR_uint8, AUTOMATIC, RTE_APPL_DATA) data );
 #define Rte_Read_RP_Parameter_ReceiveCalibParam     Rte_Read_ReceiveCalibParam
 
-extern FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadBlock( VAR(NvM_BlockIdType, AUTOMATIC) BlockId, P2(void, AUTOMATIC) NvM_DstPtr );
-#define Rte_Call_RP_MemorySeat_NvM_ReadBlock        Rte_Call_NvM_ReadBlock
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadCurrentPosition( P2(AUTOSAR_uint16, AUTOMATIC) NvM_DstPtr );
+#define Rte_Call_RP_MemorySeat_NvM_ReadCurrentPosition  Rte_Call_NvM_ReadCurrentPosition
 
-extern FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteBlock( VAR(NvM_BlockIdType, AUTOMATIC) BlockId, P2(void, AUTOMATIC) NvM_SrcPtr );
-#define Rte_Call_RP_MemorySeat_NvM_WriteBlock        Rte_Call_NvM_WriteBlock
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadMode( P2(AUTOSAR_uint32, AUTOMATIC) NvM_DstPtr );
+#define Rte_Call_RP_MemorySeat_NvM_ReadMode             Rte_Call_NvM_ReadMode
+
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteCurruntPosition( P2(AUTOSAR_uint16, AUTOMATIC) NvM_SrcPtr );
+#define Rte_Call_RP_MemorySeat_NvM_WriteCurruntPosition Rte_Call_NvM_WriteCurruntPosition
+
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteMode( P2(AUTOSAR_uint32, AUTOMATIC) NvM_SrcPtr );
+#define Rte_Call_RP_MemorySeat_NvM_WriteMode            Rte_Call_NvM_WriteMode
 
 /*----------------------------------------------------------------------------*/
 /* Runnables Prototype Declaration                                            */
