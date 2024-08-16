@@ -5,6 +5,7 @@
 /* include headers                                                            */
 /*----------------------------------------------------------------------------*/
 #include "Rte_ElectricSeatControl_Type.h"
+#include "Rte_DataHandle.h"
 
 /*----------------------------------------------------------------------------*/
 /* RTE APIs Prototype Declaration                                             */

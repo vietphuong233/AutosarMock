@@ -258,7 +258,7 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
 
             case MEMORY_READ_COMMAND:
                 /* Read NvM block to mem_data */
-                Rte_Call_RP_MemorySeat_NvM_ReadBlock( (uint16_t*)(&mem_data) );
+                Rte_Call_RP_MemorySeat_NvM_ReadBlock( (uint16*)(&mem_data) );
                 /* Copy data to setting_position */
                 setting_position = GetPosition(mem_data, mode);
                 /* Check if setting and current position is the same */
@@ -271,7 +271,7 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
 
             case MEMORY_WRITE_COMMAND:
                 /* Read NvM block to mem_data */
-                Rte_Call_RP_MemorySeat_NvM_ReadBlock( (uint16_t*)(&mem_data) );
+                Rte_Call_RP_MemorySeat_NvM_ReadBlock( (uint16*)(&mem_data) );
                 /* Update new position to mem_data */
                 switch (mode)
                 {
@@ -290,7 +290,7 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
                         break;
                 }
                 /* Write new data to NvM  */
-                Rte_Call_RP_MemorySeat_NvM_WriteBlock( (uint16_t*)(&mem_data) );
+                Rte_Call_RP_MemorySeat_NvM_WriteBlock( (uint16*)(&mem_data) );
                 break;
 
             default:

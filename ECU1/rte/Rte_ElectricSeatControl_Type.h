@@ -40,31 +40,6 @@ typedef enum _setting_mode
     SETTING_MODE2,    /* Setting from button 2 */
 } setting_mode_t;
 
-
-/* Seat position definition */
-typedef struct _seat_position
-{
-    uint8_t SEAT_POS;        /* Position of Seat */
-    uint8_t BACKREST_POS;    /* Position of Backrest */
-
-} seat_position_t;
-
-/* Seat control definition */
-typedef struct _seat_control
-{
-    seat_position_t POSITION;       /* Current Positon */
-    int8_t          SEAT_MOVE;      /* Seat move needed */
-    int8_t          BACKREST_MOVE;  /* Back rest move needed */
-    seat_state_t    STATE;          /* Current State */
-} seat_control_t;
-
-/* Setting data on NvM */
-typedef struct _setting_data
-{
-    seat_position_t MODE1_DATA;
-    seat_position_t MODE2_DATA;
-} setting_data_t;
-
 /* Check command type macros */
 #define MOVE_MASK                     0x0Fu
 #define MOVE_COMMAND_SHIFT            4u
