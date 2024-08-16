@@ -23,9 +23,9 @@ TASK (OsTask_ControlMotor)
 
     while ( 1 )
     {
-        (void) WaitEvent  (Periodic_SignalHandle_10ms | Periodic_ProcessCommand_10ms);
-        (void) GetEvent   (Task_ProcessCommand, &ev);
-        (void) ClearEvent (ev & (Periodic_SignalHandle_10ms | Periodic_ProcessCommand_10ms));
+        (void) WaitEvent  (Periodic_ControlMotor_10ms);
+        (void) GetEvent   (OsTask_ControlMotor, &ev);
+        (void) ClearEvent (ev & (Periodic_ControlMotor_10ms));
 
         if ((ev & Periodic_ControlMotor_10ms) != (EventMaskType) 0)
         {

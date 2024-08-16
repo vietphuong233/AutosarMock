@@ -17,10 +17,10 @@
 #ifndef COMPILER_CFG_H
 #define COMPILER_CFG_H
 
-/* 
+/*
  * Compiler_Cfg.c is normally a system-wide header file.
  * Typically the system integrator will take the settings
- * from each module and construct this by hand. 
+ * from each module and construct this by hand.
  * The contents of "Os_Compiler_Cfg.h" can be used by
  * the system integrator for this purpose.
  */

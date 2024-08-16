@@ -64,16 +64,13 @@ FUNC(Std_ReturnType, RTE_CODE) Rte_Read_RP_Parameter_ReceiveCalibParam( P2VAR(AU
 
 
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
 /* Name        : Rte_Call_RP_MemorySeat_NvM_ReadCurrentPosition               */
 /* Param       : P2VAR: Pointer to the RAM data block                         */
 /* Return      :                                                              */
 /* Contents    : Read current position data from NV memory                    */
-/* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadCurrentPosition( P2VAR(AUTOSAR_uint16, AUTOMATIC) NvM_DstPtr ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadCurrentPosition( P2VAR(AUTOSAR_uint16, AUTOMATIC, RTE_APPL_DATA) NvM_DstPtr ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
     NvM_ReadBlock(NvMBlock0, (uint16*)NvM_DstPtr)
@@ -82,16 +79,13 @@ FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadCurrentPosition( P
 
 
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
 /* Name        : Rte_Call_RP_MemorySeat_NvM_ReadMode                          */
 /* Param       : P2VAR: Pointer to the RAM data block                         */
 /* Return      :                                                              */
 /* Contents    : Read mode position data from NV memory                       */
-/* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadMode( P2VAR(AUTOSAR_uint32, AUTOMATIC) NvM_DstPtr ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadMode( P2VAR(AUTOSAR_uint32, AUTOMATIC, RTE_APPL_DATA) NvM_DstPtr ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
     NvM_ReadBlock(NvMBlock1, (uint32*)NvM_DstPtr)
@@ -100,16 +94,13 @@ FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadMode( P2VAR(AUTOSA
 
 
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
 /* Name        : Rte_Call_RP_MemorySeat_NvM_WriteCurrentPosition              */
 /* Param       : P2VAR: Pointer to the RAM data block                         */
 /* Return      :                                                              */
 /* Contents    : Write current position data to NV memory                     */
-/* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteCurruntPosition( P2AVAR(AUTOSAR_uint16, AUTOMATIC) NvM_SrcPtr ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteCurruntPosition( P2VAR(AUTOSAR_uint16, AUTOMATIC, RTE_APPL_DATA) NvM_SrcPtr ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
     NvM_WriteBlock(NvMBlock0, (uint16*) NvM_SrcPtr)
@@ -117,15 +108,13 @@ FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteCurruntPosition( 
 }
 
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
 /* Name        : Rte_Call_RP_MemorySeat_NvM_WriteMode                         */
 /* Param       : P2VAR: Pointer to the RAM data block                         */
 /* Return      :                                                              */
 /* Contents    : Write mode position data to NV memory                        */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteMode( P2VAR(AUTOSAR_uint32, AUTOMATIC) NvM_SrcPtr ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteMode( P2VAR(AUTOSAR_uint32, AUTOMATIC, RTE_APPL_DATA) NvM_SrcPtr ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
     NvM_WriteBlock(NvMBlock1, (uint32*) NvM_SrcPtr)

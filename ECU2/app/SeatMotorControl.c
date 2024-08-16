@@ -27,16 +27,17 @@ FUNC(void, MotorControl_CODE) HandlePositionCommand_10ms( VAR(void, AUTOMATIC) )
         case MOVE_FORWARD_COMMAND:
             Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward();
             break;
+
         case MOVE_BACKWARD_COMMAND:
-            Rte_Call_RP_MotorControl_IoHwAbSeatMoveBack();
+            Rte_Call_RP_MotorControl_IoHwAb_SeatMoveBack();
             break;
 
         case FOLD_COMMAND:
-            IoHwAb_BackSeatFold();
+            Rte_Call_RP_MotorControl_IoHwAb_BackSeatFold();
             break;
 
         case UNFOLD_COMMAND:
-            IoHwAb_BackSeatUnFold();
+            Rte_Call_RP_MotorControl_IoHwAb_BackSeatUnfold();
             break;
 
         default:
@@ -45,7 +46,7 @@ FUNC(void, MotorControl_CODE) HandlePositionCommand_10ms( VAR(void, AUTOMATIC) )
     }
 
     /* Simulate Watchdog checkpoint */
-    Rte_Call_WdgMCheckpointReached(se_id, cp_id);
+    Rte_Call_WdgMCheckpointReached(SE3_ID, CP_ID_3);
 }
 
 /* End of Seat_Motor_Control.c */

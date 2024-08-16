@@ -35,13 +35,10 @@ FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MotorControl_IoHwAb_SeatMoveBack( VAR
 
 extern FUNC(void, IoHwAb_CODE) IoHwAb_BackSeatFold( VAR(void, AUTOMATIC));
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
 /* Name        : Rte_Call_RP_MotorControl_IoHwAb_BackSeatFold                 */
 /* Param       :                                                              */
 /* Return      :                                                              */
 /* Contents    : Call IoHwAb to fold backseat                                 */
-/* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
 FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MotorControl_IoHwAb_BackSeatFold( VAR(void, AUTOMATIC) ) {
@@ -53,13 +50,10 @@ FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MotorControl_IoHwAb_BackSeatFold( VAR
 
 extern FUNC(void, IoHwAb_CODE) IoHwAb_BackSeatUnFold( VAR(void, AUTOMATIC));
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
-/* Name        : Rte_Call_RP_MotorControl_IoHwAb_BackSeatFold                 */
+/* Name        : Rte_Call_RP_MotorControl_IoHwAb_BackSeatUnFold               */
 /* Param       :                                                              */
 /* Return      :                                                              */
 /* Contents    : Call IoHwAb to unfold backseat                               */
-/* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
 FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MotorControl_IoHwAb_BackSeatUnfold( VAR(void, AUTOMATIC) ) {
@@ -73,13 +67,10 @@ FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MotorControl_IoHwAb_BackSeatUnfold( V
 VAR(AUTOSAR_uint8, AUTOMATIC) Rte_Read_RP_PositionCommand_Command_value;
 VAR(Std_ReturnType, AUTOMATIC) Rte_Read_RP_PositionCommand_Command_status = RTE_E_NEVER_RECEIVED;
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
 /* Name        : Rte_Read_RP_PositionCommand_ReceiveCommand                   */
 /* Param       : P2VAR: Pointer to memory location which save command         */
 /* Return      :                                                              */
 /* Contents    : Receive Command from Electric Seat Control SWC               */
-/* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
 FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Read_RP_PositionCommand_ReceiveCommand( P2VAR(AUTOSAR_uint8, AUTOMATIC, RTE_APPL_DATA) command ) {
@@ -96,13 +87,10 @@ FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Read_RP_PositionCommand_Recei
 
 extern FUNC(void, MotorControl_CODE) HandlePositionCommand_10ms( VAR(void, AUTOMATIC) );
 /******************************************************************************/
-/* ModuleID    :                                                              */
-/* ServiceID   :                                                              */
 /* Name        : Rte_HandlePositionCommand_10ms                               */
 /* Param       :                                                              */
 /* Return      :                                                              */
 /* Contents    : Runnable Handle Position Command                             */
-/* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
 FUNC(void, RTE_CODE) Rte_HandlePositionCommand_10ms( VAR(void, AUTOMATIC) ) {
@@ -110,4 +98,6 @@ FUNC(void, RTE_CODE) Rte_HandlePositionCommand_10ms( VAR(void, AUTOMATIC) ) {
     HandlePositionCommand_10ms();
 
 }
+
+/* End of Rte_MotorControl.c */
 

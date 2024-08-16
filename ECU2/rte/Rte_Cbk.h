@@ -5,4 +5,6 @@
 
 extern FUNC(void, AUTOMATIC) Rte_COMCbk_CommandSignal( VAR(void, AUTOMATIC) );
 
-#endif
+#endif /* RTE_CBK_H */
+
+/* End of Rte_Cbk.h */

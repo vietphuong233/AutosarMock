@@ -10,11 +10,6 @@
 /* definitions                                                                */
 /*----------------------------------------------------------------------------*/
 
-/* Type definition */
-#define io_signal            uint8
-#define command_signal       uint8
-#define IO_CHANNEL_GROUP_1   /* Simulate IO channel group */
-
 /* IO Hardware Signal Bit Macros */
 #define CHECK_MASK          0x01u
 #define FORWARD_SHIFT       6u

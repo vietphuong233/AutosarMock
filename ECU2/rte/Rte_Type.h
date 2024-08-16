@@ -6,4 +6,6 @@
 typedef uint8 AUTOSAR_uint8;
 typedef uint16 COM_SignalIdtype;
 
-#endif
+#endif /* RTE_TYPE_H */
+
+/* End of Rte_Type.h */

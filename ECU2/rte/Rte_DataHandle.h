@@ -1,5 +1,5 @@
-#ifndef RTE_MOTOR_CONTROL_TYPE_H
-#define RTE_MOTOR_CONTROL_TYPE_H
+#ifndef RTE_DATAHANDLE_H
+#define RTE_DATAHANDLE_H
 
 /*----------------------------------------------------------------------------*/
 /* include headers                                                            */
@@ -10,15 +10,9 @@
 /* definitions                                                                */
 /*----------------------------------------------------------------------------*/
 
-/* Command Signal Definitions */
-#define MOVE_FORWARD_COMMAND   0x40u
-#define MOVE_BACKWARD_COMMAND  0x80u
-#define FOLD_COMMAND           0x10u
-#define UNFOLD_COMMAND         0x20u
-#define SET_MODE_COMMAND       0x04u
-#define MODE1_COMMAND          0x08u
-#define MODE2_COMMAND          0x0Cu
+/* Command signal definition */
+#define command_signal       uint8
 
-#endif /* RTE_MOTOR_CONTROL_TYPE_H */
+#endif /* RTE_DATAHANDLE_H */
 
-/* End of Rte_MotorControl_Type.h */
+/* End of Rte_DataHandle.h */

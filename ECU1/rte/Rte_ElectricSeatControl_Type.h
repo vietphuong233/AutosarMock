@@ -21,23 +21,23 @@ typedef enum _command_type
 /* Check position status */
 typedef enum _position_status
 {
-    MOVE_OK,
-    MOVE_NOT_OK,
+    MOVE_OK,                /* Move is possible     */
+    MOVE_NOT_OK,            /* Move is not possible */
 } position_status_t;
 
 /* Seat control state definition */
 typedef enum _seat_state
 {
-    ADJUSTING,    /* Doing adjusting sequence */
-    IDLING,       /* Waiting for command      */
+    ADJUSTING,              /* Doing adjusting sequence */
+    IDLING,                 /* Waiting for command      */
 } seat_state_t;
 
 /* Setting mode number */
 typedef enum _setting_mode
 {
-    NO_SETTING,       /* No button dectected */
-    SETTING_MODE1,    /* Setting from button 1 */
-    SETTING_MODE2,    /* Setting from button 2 */
+    NO_SETTING,             /* No button dectected   */
+    SETTING_MODE1,          /* Setting from button 1 */
+    SETTING_MODE2,          /* Setting from button 2 */
 } setting_mode_t;
 
 /* Check command type macros */

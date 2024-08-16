@@ -2,12 +2,11 @@
 /* include headers                                                            */
 /*----------------------------------------------------------------------------*/
 #include "Rte_ElectricSeatControl.h"
-#include "Rte_SeatAdjuster.h"
 
 /*----------------------------------------------------------------------------*/
 /* variables                                                                  */
 /*----------------------------------------------------------------------------*/
-static seat_control_t g_CONTROL;          /* Controller for runnable */
+static seat_control_t  g_CONTROL;         /* Controller for runnable */
 
 static seat_position_t g_MAX_POSITION;    /* Max position allowed */
 
@@ -79,9 +78,11 @@ static position_status_t UpdatePosition( const command_signal command )
               g_CONTROL.POSITION.SEAT_POS++;
             }
             break;
+
         case MOVE_BACKWARD_SIGNAL:
             g_CONTROL.POSITION.SEAT_POS--;
             break;
+
         case FOLD_SIGNAL:
             if ( g_CONTROL.POSITION.BACKREST_POS == g_MAX_POSITION.BACKREST_POS )
             {
@@ -93,9 +94,11 @@ static position_status_t UpdatePosition( const command_signal command )
                 g_CONTROL.POSITION.BACKREST_POS++;
             }
             break;
+
         case UNFOLD_SIGNAL:
             g_CONTROL.POSITION.BACKREST_POS--;
             break;
+
         default:
             /* Empty signal, do nothing */
             break;
@@ -205,7 +208,7 @@ FUNC(void, SeatAdjuster_CODE) InitElectricSeatControl( VAR(void, AUTOMATIC) )
     seat_position_t init_position;
 
     Rte_Read_RP_Parameter_ReceiveCalibParam(&g_MAX_POSITION);
-    Rte_Call_RP_MemorySeat_NvM_ReadBlock(BLOCKIDOLD, &init_position);
+    Rte_Call_RP_MemorySeat_NvM_ReadCurrentPosition(&init_position);
 
     g_CONTROL.POSITION.SEAT_POS     = init_position.SEAT_POS;
     g_CONTROL.POSITION.BACKREST_POS = init_position.BACKREST_POS;
@@ -258,7 +261,7 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
 
             case MEMORY_READ_COMMAND:
                 /* Read NvM block to mem_data */
-                Rte_Call_RP_MemorySeat_NvM_ReadBlock( (uint16*)(&mem_data) );
+                Rte_Call_RP_MemorySeat_NvM_ReadMode( (uint32*)(&mem_data) );
                 /* Copy data to setting_position */
                 setting_position = GetPosition(mem_data, mode);
                 /* Check if setting and current position is the same */
@@ -271,7 +274,7 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
 
             case MEMORY_WRITE_COMMAND:
                 /* Read NvM block to mem_data */
-                Rte_Call_RP_MemorySeat_NvM_ReadBlock( (uint16*)(&mem_data) );
+                Rte_Call_RP_MemorySeat_NvM_ReadMode( (uint32*)(&mem_data) );
                 /* Update new position to mem_data */
                 switch (mode)
                 {
@@ -285,12 +288,12 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
                         mem_data.MODE2_DATA.BACKREST_POS = g_CONTROL.POSITION.BACKREST_POS;
                         break;
 
-                    default
+                    default:
                         /* Do nothing */
                         break;
                 }
                 /* Write new data to NvM  */
-                Rte_Call_RP_MemorySeat_NvM_WriteBlock( (uint16*)(&mem_data) );
+                Rte_Call_RP_MemorySeat_NvM_WriteMode( (uint32*)(&mem_data) );
                 break;
 
             default:
@@ -336,10 +339,10 @@ FUNC(void, SeatAdjuster_CODE) ProcessCommand_10ms( VAR(void, AUTOMATIC) )
     }
 
     /* Save current position to Nv Memory */
-
+    Rte_Call_RP_MemorySeat_NvM_WriteCurruntPosition( (uint16*)(&g_CONTROL.POSITION) );
 
     /* Simulate Watchdog checkpoint */
-    Rte_Call_WdgMCheckpointReached(se_id, cp_id);
+    Rte_Call_WdgMCheckpointReached(SE1_ID, CP_ID_1);
 }
 
 /* End of Seat_Adjuster.c */

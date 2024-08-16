@@ -4,7 +4,7 @@
  * \author Group1B
  *
  */
- 
+
 #ifndef STD_TYPES_H
 #define STD_TYPES_H
 
@@ -29,7 +29,7 @@ typedef uint8 Std_ReturnType;
 #define E_OK      			0U
 #define STD_HIGH    		1U
 #define STD_LOW     		0U
-#define E_OK			0U
-#define E_NOK			1U
+#define E_OK			    0U
+#define E_NOK		    	1U
 
-#endif
+#endif /* STD_TYPE_H */
