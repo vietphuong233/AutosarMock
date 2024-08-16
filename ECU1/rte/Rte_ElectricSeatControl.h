@@ -34,6 +34,7 @@ FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteMode( P2(AUTOSAR_
 /*----------------------------------------------------------------------------*/
 /* Runnables Prototype Declaration                                            */
 /*----------------------------------------------------------------------------*/
+extern FUNC(void, RTE_CODE) Rte_InitElectricSeatControl( VAR(void, AUTOMATIC) );
 extern FUNC(void, RTE_CODE) Rte_ProcessCommand_10ms( VAR(void, AUTOMATIC) );
 
 #endif /* RTE_ELECTRICSEATCONTROL_H */

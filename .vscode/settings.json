@@ -4,7 +4,7 @@
         "rte_seatadjustment.h": "c",
         "electric_seat_control_swc.h": "c",
         "rte_seatadjuster_type.h": "c",
-        "rte_seatadjuster.h": "c"
-    },
-    "C_Cpp.errorSquiggles": "disabled"
+        "rte_seatadjuster.h": "c",
+        "rte_type.h": "c"
+    },s
 }

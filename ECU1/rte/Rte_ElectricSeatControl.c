@@ -150,4 +150,19 @@ FUNC(void, RTE_CODE) Rte_ProcessCommand_10ms( VAR(void, AUTOMATIC) ) {
 }
 
 
+extern FUNC(void, ElectricSeatControl_CODE) InitElectricSeatControl( VAR(void, AUTOMATIC) );
+/******************************************************************************/
+/* Name        : Rte_InitElectricSeatControl                                  */
+/* Param       :                                                              */
+/* Return      :                                                              */
+/* Contents    : Runnable Init Electric Seat Control                          */
+/* Note        :                                                              */
+/******************************************************************************/
+FUNC(void, RTE_CODE) Rte_InitElectricSeatControl( VAR(void, AUTOMATIC) ) {
+
+    InitElectricSeatControl();
+
+}
+
+
 

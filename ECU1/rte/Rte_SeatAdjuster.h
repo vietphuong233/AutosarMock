@@ -18,7 +18,7 @@ extern FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Write_PP_PositionData_
 /*----------------------------------------------------------------------------*/
 /* Runnables Prototype Declaration                                            */
 /*----------------------------------------------------------------------------*/
-extern FUNC(void, RTE_CODE_EcucPartition_0) Rte_HandleSeatAdjuster_10ms( VAR(void, AUTOMATIC) );
+extern FUNC(void, RTE_CODE) Rte_HandleSeatAdjuster_10ms( VAR(void, AUTOMATIC) );
 
 #endif /* RTE_SEATADJUSTER_H */
 
