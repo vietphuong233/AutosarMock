@@ -9,7 +9,7 @@ extern FUNC(void, IoHwAb_CODE) IoHwAb_SeatMoveForward( VAR(void, AUTOMATIC));
 /* Contents    : Call IoHwAb to move seat forward                             */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward( VAR(void, AUTOMATIC) ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MotorControl_IoHwAb_SeatMoveForward( VAR(void, AUTOMATIC) ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
     IoHwAb_SeatMoveForward();
@@ -25,7 +25,7 @@ extern FUNC(void, IoHwAb_CODE) IoHwAb_SeatMoveBack( VAR(void, AUTOMATIC));
 /* Contents    : Call IoHwAb to move seat back                                */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MotorControl_IoHwAbSeatMoveBack( VAR(void, AUTOMATIC) ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MotorControl_IoHwAb_SeatMoveBack( VAR(void, AUTOMATIC) ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
     IoHwAb_SeatMoveBack();
@@ -44,7 +44,7 @@ extern FUNC(void, IoHwAb_CODE) IoHwAb_BackSeatFold( VAR(void, AUTOMATIC));
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MotorControl_IoHwAb_BackSeatFold( VAR(void, AUTOMATIC) ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MotorControl_IoHwAb_BackSeatFold( VAR(void, AUTOMATIC) ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
     IoHwAb_BackSeatFold();
@@ -62,7 +62,7 @@ extern FUNC(void, IoHwAb_CODE) IoHwAb_BackSeatUnFold( VAR(void, AUTOMATIC));
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MotorControl_IoHwAb_BackSeatUnfold( VAR(void, AUTOMATIC) ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MotorControl_IoHwAb_BackSeatUnfold( VAR(void, AUTOMATIC) ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
     IoHwAb_BackSeatUnfold();
@@ -105,22 +105,9 @@ extern FUNC(void, MotorControl_CODE) HandlePositionCommand_10ms( VAR(void, AUTOM
 /* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(void, RTE_CODE_EcucPartition_0) Rte_HandlePositionCommand_10ms( VAR(void, AUTOMATIC) ) {
+FUNC(void, RTE_CODE) Rte_HandlePositionCommand_10ms( VAR(void, AUTOMATIC) ) {
 
     HandlePositionCommand_10ms();
 
 }
 
-
-
-
-VAR(AUTOSAR_uint8, AUTOMATIC) Rte_CommandSignal;
-extern FUNC(Std_ReturnType, Com_CODE) Com_ReceiveSignal( VAR(Com_SignalIdType, AUTOMATIC) SignalId, P2VAR(void, AUTOMATIC, RTE_APPL_DATA) SignalDataPtr );
-
-FUNC(void, RTE_CODE_EcucPartition_0) Rte_COMCbk_CommandSignal( void )
-{
-    if (Rte_InitState == RTE_STATE_INIT)
-    {
-        (void)Com_ReceiveSignal(ComConf_ComSignal_ComISignal_HS_CAN1_CommandSignal, &Rte_CommanSignal);
-    }
-}

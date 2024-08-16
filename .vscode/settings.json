@@ -6,5 +6,4 @@
         "rte_seatadjuster_type.h": "c",
         "rte_seatadjuster.h": "c"
     },
-    "C_Cpp.errorSquiggles": "disabled"
 }
