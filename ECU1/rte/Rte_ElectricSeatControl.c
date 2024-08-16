@@ -10,7 +10,7 @@ extern VAR(AUTOSAR_uint8, AUTOMATIC) adjust_data;
 /* Contents    : Read position data from Seat Adjuster SWC                    */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Read_RP_PositionData_ReceivePosition( P2VAR(AUTOSAR_uint8, AUTOMATIC, RTE_APPL_DATA) data ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Read_RP_PositionData_ReceivePosition( P2VAR(AUTOSAR_uint8, AUTOMATIC, RTE_APPL_DATA) data ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
     *data = adjust_data;
 
@@ -25,12 +25,12 @@ FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Read_RP_PositionData_ReceiveP
 /* Contents    : Send Command to Motor Control SWC                            */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Write_PP_PositionCommand_SendCommand( VAR(AUTOSAR_uint8, AUTOMATIC) command ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Write_PP_PositionCommand_SendCommand( VAR(AUTOSAR_uint8, AUTOMATIC) command ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
     VAR(Std_ReturnType, AUTOMATIC) ret;
     VAR(AUTOSAR_uint8, AUTOMATIC) tmp_data = command;
 
-    ret = Com_SendSignal( ComConf_ComSignal_ComISignal_HS_CAN1_CommandSignal, &tmp_data );
+    ret = Com_SendSignal( ComConf_ComSignal_CommandSignal, &tmp_data );
     switch( ret ) {
     case COM_SERVICE_NOT_AVAILABLE:
         ret_val = RTE_E_COM_STOPPED;
@@ -55,7 +55,7 @@ extern VAR(ParameterType, AUTOMATIC) parm;
 /* Contents    : Receive default data from Parameter SWC                      */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Read_RP_Parameter_ReceiveCalibParam( P2VAR(AUTOSAR_uint8, AUTOMATIC, RTE_APPL_DATA) data ) {
+FUNC(Std_ReturnType, RTE_CODE) Rte_Read_RP_Parameter_ReceiveCalibParam( P2VAR(AUTOSAR_uint8, AUTOMATIC, RTE_APPL_DATA) data ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
     *data = parm;
@@ -63,26 +63,62 @@ FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Read_RP_Parameter_ReceiveCali
 }
 
 
-extern FUNC(Std_ReturnType, NvM_CODE) NvM_ReadBlock( VAR(NvM_BlockIdType, AUTOMATIC) BlockId, P2(void, AUTOMATIC) NvM_DstPtr);
 /******************************************************************************/
-/* Name        : Rte_Call_RP_MemorySeat_NvM_ReadBlock                         */
-/* Param       : VAR: The block identifier uniquely identifies one NVRAM block*/
-/*                    descriptor                                              */
-/*               P2VAR: Pointer to the RAM data block                         */
+/* ModuleID    :                                                              */
+/* ServiceID   :                                                              */
+/* Name        : Rte_Call_RP_MemorySeat_NvM_ReadCurrentPosition               */
+/* Param       : P2VAR: Pointer to the RAM data block                         */
 /* Return      :                                                              */
-/* Contents    : Read data from NV memory                                     */
+/* Contents    : Read current position data from NV memory                    */
+/* Author      : QINeS Ecuc Generator(Java)                                   */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MemorySeat_NvM_ReadBlock( VAR(NvM_BlockIdType, AUTOMATIC) BlockId, P2(void, AUTOMATIC) NvM_DstPtr ) {
-    VAR(Std_ReturnType, AUTOMATIC) ret_val;
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadCurrentPosition( P2(uint16, AUTOMATIC) NvM_DstPtr ) {
+    VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
-    ret_val = NvM_ReadBlock(BlockId, NvM_DstPtr);
+    NvM_ReadBlock(NvMBlock0, (uint16*)NvM_DstPtr)
     return ret_val;
 }
 
 
-extern FUNC(Std_ReturnType, NvM_CODE) NvM_WriteBlock( VAR(NvM_BlockIdType, AUTOMATIC) BlockId, P2(void, AUTOMATIC) NvM_SrcPtr);
 /******************************************************************************/
+/* ModuleID    :                                                              */
+/* ServiceID   :                                                              */
+/* Name        : Rte_Call_RP_MemorySeat_NvM_ReadMode                          */
+/* Param       : P2VAR: Pointer to the RAM data block                         */
+/* Return      :                                                              */
+/* Contents    : Read mode position data from NV memory                       */
+/* Author      : QINeS Ecuc Generator(Java)                                   */
+/* Note        :                                                              */
+/******************************************************************************/
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_ReadMode( P2(uint32, AUTOMATIC) NvM_DstPtr ) {
+    VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
+
+    NvM_ReadBlock(NvMBlock1, (uint32*)NvM_DstPtr)
+    return ret_val;
+}
+
+
+/******************************************************************************/
+/* ModuleID    :                                                              */
+/* ServiceID   :                                                              */
+/* Name        : Rte_Call_RP_MemorySeat_NvM_ReadMode                          */
+/* Param       : P2VAR: Pointer to the RAM data block                         */
+/* Return      :                                                              */
+/* Contents    : Write current position data to NV memory                     */
+/* Author      : QINeS Ecuc Generator(Java)                                   */
+/* Note        :                                                              */
+/******************************************************************************/
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteCurruntPosition( P2(void, AUTOMATIC) NvM_SrcPtr ) {
+    VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
+
+    NvM_WriteBlock(NvMBlock0, (uint16*) NvM_SrcPtr)
+    return ret_val;
+}
+
+/******************************************************************************/
+/* ModuleID    :                                                              */
+/* ServiceID   :                                                              */
 /* Name        : Rte_Call_RP_MemorySeat_NvM_WriteBlock                        */
 /* Param       : VAR: The block identifier uniquely identifies one NVRAM block*/
 /*                    descriptor                                              */
@@ -91,10 +127,10 @@ extern FUNC(Std_ReturnType, NvM_CODE) NvM_WriteBlock( VAR(NvM_BlockIdType, AUTOM
 /* Contents    : Write data to NV memory                                      */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_MemorySeat_NvM_WriteBlock( VAR(NvM_BlockIdType, AUTOMATIC) BlockId, P2(void, AUTOMATIC) NvM_SrcPtr ) {
-    VAR(Std_ReturnType, AUTOMATIC) ret_val;
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_RP_MemorySeat_NvM_WriteMode( P2(void, AUTOMATIC) NvM_SrcPtr ) {
+    VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
-    ret_val = NvM_WriteBlock(BlockId, NvM_SrcPtr);
+    NvM_WriteBlock(NvMBlock0, (uint32*) NvM_SrcPtr)
     return ret_val;
 }
 
@@ -107,7 +143,7 @@ extern FUNC(void, ElectricSeatControl_CODE) ProcessCommand_10ms( VAR(void, AUTOM
 /* Contents    : Runnable Process Command                                     */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(void, RTE_CODE_EcucPartition_0) Rte_ProcessCommand_10ms( VAR(void, AUTOMATIC) ) {
+FUNC(void, RTE_CODE) Rte_ProcessCommand_10ms( VAR(void, AUTOMATIC) ) {
 
     ProcessCommand_10ms();
 

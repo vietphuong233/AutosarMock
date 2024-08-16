@@ -2,7 +2,7 @@
 #include "Rte_SeatAdjuster.h"
 
 
-extern FUNC(Dio_PortLevelType, IoHwAb_CODE) IoHwAb_DioReadChannelGroups( P2CONST(Dio_ChannelGroupType , AUTOMATIC) ChanelGroupIdPtr );
+extern FUNC(void, IoHwAb_CODE) IoHwAb_DioReadChannelGroups( P2VAR(Dio_PortLevelType, AUTOMATIC, RTE_APPL_DATA) state );
 /******************************************************************************/
 /* Name        : Rte_Call_RP_AdjustData_DioReadChannelGroup                   */
 /* Param       : P2CONST: Pointer to ChannelGroup                             */
@@ -11,10 +11,10 @@ extern FUNC(Dio_PortLevelType, IoHwAb_CODE) IoHwAb_DioReadChannelGroups( P2CONST
 /* Contents    : Read button state from IoHwAb                                */
 /* Note        :                                                              */
 /******************************************************************************/
-FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_AdjustData_IoHwAb_DioReadChannelGroup( P2CONST(Dio_ChannelGroupType , AUTOMATIC, RTE_APPL_DATA) id, P2VAR(Dio_PortLevelType, AUTOMATIC, RTE_APPL_DATA) state ) {
+FUNC(Std_ReturnType, RTE_CODE_EcucPartition_0) Rte_Call_RP_AdjustData_IoHwAb_DioReadChannelGroup( P2VAR(Dio_PortLevelType, AUTOMATIC, RTE_APPL_DATA) state ) {
     VAR(Std_ReturnType, AUTOMATIC) ret_val = RTE_E_OK;
 
-    *state = IoHwAb_DioReadChannelGroups( id );
+    IoHwAb_DioReadChannelGroups( state );
     return ret_val;
 }
 
