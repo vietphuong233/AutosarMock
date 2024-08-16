@@ -201,15 +201,18 @@ static seat_position_t GetPosition(const setting_data_t mem_data,
 /* Return      :                                                              */
 /* Contents    : Initiate Electric Seat Control SWC variables                 */
 /* Author      :                                                              */
-/* Note        : This Runnable initiate global variables g_...                */
+/* Note        : This Runnable initiate read data to initiate global var:     */
+/*                   g_MAX_POSITION    : read from calibration paramter       */
+/*                   g_CONTROL.POSITION: read from NvM                        */
 /******************************************************************************/
 FUNC(void, SeatAdjuster_CODE) InitElectricSeatControl( VAR(void, AUTOMATIC) )
 {
     seat_position_t init_position;
 
+    /* Read calibration parameter for max position allowed */
     Rte_Read_RP_Parameter_ReceiveCalibParam(&g_MAX_POSITION);
+    /* Read previous position saved in NvM */
     Rte_Call_RP_MemorySeat_NvM_ReadCurrentPosition(&init_position);
-
     g_CONTROL.POSITION.SEAT_POS     = init_position.SEAT_POS;
     g_CONTROL.POSITION.BACKREST_POS = init_position.BACKREST_POS;
     g_CONTROL.SEAT_MOVE             = 0;
