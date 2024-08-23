@@ -18,5 +18,4 @@
 
 #endif /*RTE_H_*/
 
-
 /* End of Rte.h */
